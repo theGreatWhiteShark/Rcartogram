@@ -74,37 +74,37 @@ function(`_data`, x, y = NULL, ...)
   predict(`_data`, x, y, ...) 
 }
 
-predict.Cartogram =
-function(object, x, y = NULL, ...)
-{
-  if(missing(y) || is.null(y)) {
-    y = x[,2]
-    x = x[,1]
-  }
+## predict.Cartogram =
+## function(object, x, y = NULL, ...)
+## {
+##   if(missing(y) || is.null(y)) {
+##     y = x[,2]
+##     x = x[,1]
+##   }
 
-  if(length(x) != length(y)) {
-    len = max(length(x), length(y))
-    length(x) = len
-    length(y) = len    
-  }
+##   if(length(x) != length(y)) {
+##     len = max(length(x), length(y))
+##     length(x) = len
+##     length(y) = len    
+##   }
      
   
-  tmp = rep(as.numeric(NA), length(x))
-  ans = list(x = tmp, y = tmp)
+##   tmp = rep(as.numeric(NA), length(x))
+##   ans = list(x = tmp, y = tmp)
 
-  .Call("R_predict", object, as.numeric(x),  as.numeric(y), ans, dim(object$x))
-  ans
-}
+##   .Call("R_predict", object, as.numeric(x),  as.numeric(y), ans, dim(object$x))
+##   ans
+## }
 
-if(FALSE)  # an in R version.
-predict.Cartogram =
+## if(FALSE)  # an in R version.
+## Well, this version actually works.
+
  #
  #  Essentials taken from Mark Newman's interp.c code.
  #
  #   This is a simple, inefficient version at present. 
  #
-function(object, x, y = NULL, ...)
-{
+predict.Cartogram <- function(object, x, y = NULL, ...){
   if(missing(y)) {
     y = x[, 2]
     x = x[, 1]
@@ -126,8 +126,7 @@ function(object, x, y = NULL, ...)
             })
 }
 
-pred = 
-function(m, ix, iy, dx, dy, i = 1) {
+pred <- function(m, ix, iy, dx, dy, i = 1) {
    # + need to go at the end of the line or the R parser
    # thinks these are separate expressions with the last 3 preceded by a +
    #  e.g.  1
