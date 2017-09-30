@@ -1,0 +1,12 @@
+# Emacs auxiliary files
+*~
+#~
+
+# Auxiliary config files
+config.log
+config.status
+
+# Compilation results
+src/Makevars
+src/*.o
+src/*.so
